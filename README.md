@@ -1,1 +1,108 @@
-# ykaran
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact Form - ❤</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:sans-serif;color:#fff;}
+.bg-video{position:fixed;inset:0;z-index:-3;overflow:hidden;}
+.bg-video video{width:100%;height:100%;object-fit:cover;display:block;filter:none;}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.2);z-index:-2;}
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px;}
+.card{width:100%;max-width:760px;background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border-radius:14px;border:1px solid rgba(255,255,255,0.06);padding:28px;box-shadow:0 12px 40px rgba(0,0,0,0.6);}
+.title{font-size:36px;font-weight:900;margin-bottom:6px;display:flex;align-items:center;gap:12px;}
+.heart{font-size:40px;line-height:1;display:inline-block;padding:6px;border-radius:12px;animation:pop 1.2s ease-in-out infinite;background:linear-gradient(90deg,#ff3b3b,#ff8a00,#ffd300,#4ae0ff,#5b6cff,#c65bff);-webkit-background-clip:text;background-clip:text;color:transparent;}
+@keyframes pop{0%{transform:scale(0.92)}50%{transform:scale(1.08)}100%{transform:scale(0.92)}}
+.titleText{font-size:16px;font-weight:700;background:linear-gradient(90deg,#ff3b3b,#ff8a00,#ffd300,#4ae0ff,#5b6cff,#c65bff);-webkit-background-clip:text;background-clip:text;color:transparent;}
+form .row{display:flex;gap:12px;margin-bottom:12px;}
+form .col{flex:1;min-width:0;}
+label{display:block;font-size:13px;margin-bottom:6px;opacity:0.95;}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.02);color:#fff;font-size:14px;}
+.gender-row{display:flex;gap:12px;align-items:center;}
+.gender-row input{margin-right:6px;}
+.file-input{display:flex;align-items:center;gap:12px;}
+.preview{width:84px;height:84px;border-radius:8px;object-fit:cover;border:1px solid rgba(255,255,255,0.08);}
+.actions{display:flex;gap:12px;justify-content:flex-end;margin-top:16px;}
+button.primary{background:linear-gradient(90deg,#ff3b3b,#ff8a00,#ffd300,#4ae0ff,#5b6cff,#c65bff);background-size:300% 100%;animation:rainbow 4s linear infinite;border:none;padding:10px 16px;border-radius:10px;color:#0b0b0b;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.45);}
+button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);padding:9px 12px;border-radius:10px;color:#fff;cursor:pointer;}
+.note{font-size:12px;opacity:0.9;margin-top:10px;}
+@keyframes rainbow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(0.9);min-width:320px;background:rgba(10,10,10,0.95);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 12px 40px rgba(0,0,0,0.7);opacity:0;pointer-events:none;transition:all .22s ease;}
+.modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);}
+.modal h3{margin-bottom:8px;}
+.modal p{font-size:13px;opacity:0.95;}
+@media(max-width:640px){.card{padding:18px}.row{flex-direction:column}.actions{flex-direction:column-reverse}}
+</style>
+</head>
+<body>
+<div class="bg-video" aria-hidden="true">
+  <video autoplay muted loop playsinline id="bgvid">
+    <source src="ykaran.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="overlay"></div>
+
+<div class="wrap">
+  <div class="card" role="main">
+    <div class="title"><span class="heart">❤</span><span class="titleText">Contact Information</span></div>
+
+    <form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbweq_pMAPyW4ty8FcrBMAh0uZvIs-taK66Tlu9sIXm1hS3PcMdTjOn1SdKZZwcGB0jf/exec">
+      <div class="row">
+        <div class="col">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your full name" required />
+        </div>
+        <div class="col">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Gender</label>
+          <div class="gender-row" aria-label="gender">
+            <label><input type="radio" name="gender" value="Male" checked /> Male</label>
+            <label><input type="radio" name="gender" value="Female" /> Female</label>
+            <label><input type="radio" name="gender" value="Other" /> Other</label>
+          </div>
+        </div>
+        <div class="col">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="+91 99999 99999" pattern="[+0-9 ()-]{7,}" />
+        </div>
+      </div>
+
+      <div style="margin-bottom:12px">
+        <label for="imageUpload">Upload image (optional)</label>
+        <div class="file-input">
+          <input id="imageUpload" name="image" type="file" accept="image/*" />
+          <img id="imgPreview" class="preview" src="" alt="preview" style="display:none" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="reset" class="ghost">Reset</button>
+        <button type="submit" class="primary">Submit</button>
+      </div>
+
+      <div class="note">By submitting you agree to share the information.</div>
+    </form>
+  </div>
+</div>
+
+<script>
+const imgUpload = document.getElementById('imageUpload');
+const imgPreview = document.getElementById('imgPreview');
+
+imgUpload.addEventListener('change', e => {
+  const f = e.target.files && e.target.files[0];
+  if(!f){ imgPreview.style.display='none'; imgPreview.src=''; return; }
+  const url = URL.createObjectURL(f);
+  imgPreview.src = url; imgPreview.style.display = 'block';
+});
+</script>
+</body>
+</html>
